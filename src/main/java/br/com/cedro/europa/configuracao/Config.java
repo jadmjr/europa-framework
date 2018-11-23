@@ -46,7 +46,7 @@ public class Config {
 			return driver.findElement(By.id(id));
 		else {
 			wait = new WebDriverWait(driver, 10);
-			return wait.until(ExpectedConditions.presenceOfElementLocated(By.id(id)));
+			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
 		}
 	}
 
@@ -55,7 +55,7 @@ public class Config {
 			return driver.findElement(By.className(classe));
 		else {
 			wait = new WebDriverWait(driver, 10);
-			return wait.until(ExpectedConditions.presenceOfElementLocated(By.className(classe)));
+			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(classe)));
 		}
 	}
 
@@ -64,7 +64,7 @@ public class Config {
 			return driver.findElement(By.name(nome));
 		else {
 			wait = new WebDriverWait(driver, 10);
-			return wait.until(ExpectedConditions.presenceOfElementLocated(By.name(nome)));
+			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(nome)));
 		}
 	}
 
@@ -73,7 +73,7 @@ public class Config {
 			return driver.findElement(By.xpath(xpath));
 		else {
 			wait = new WebDriverWait(driver, 10);
-			return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 		}
 	}
 

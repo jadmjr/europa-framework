@@ -7,7 +7,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:caracteristicas", tags = {
-		"@Login" }, glue = "controlador", monochrome = true, dryRun = false, plugin = {
+		"@PesquisaGoogle" }, glue = "controlador", monochrome = true, dryRun = false, plugin = {
 				"html:target/cucumber-html-report" })
 
 public class Run {
