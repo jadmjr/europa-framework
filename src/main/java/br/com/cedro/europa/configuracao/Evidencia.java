@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -45,8 +46,8 @@ public class Evidencia {
 		File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
 
 		try {
-			FileUtils.copyFile(srcFile, new File(pasta, "evidencia_sgad.png"));
-			caminho = pasta + "evidencia_sgad.png";
+			FileUtils.copyFile(srcFile, new File(pasta, "temp.png"));
+			caminho = pasta + "temp.png";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,8 +56,9 @@ public class Evidencia {
 		return caminho;
 	}
 
-	public void geraPDF(String nomeArquivo) {
-		saidaEvidencia = saidaEvidencia + nomeArquivo + ".pdf";
+	public void geraPDF() {
+		Random randon = new Random();
+		saidaEvidencia = saidaEvidencia + randon.nextInt() + ".pdf";
 		try {
 			writer = PdfWriter.getInstance(document, new FileOutputStream(saidaEvidencia));
 		} catch (FileNotFoundException e) {
@@ -102,13 +104,44 @@ public class Evidencia {
 		}
 
 	}
+	
+	public void print(String titulo , WebDriver driver) {
+		try {
+			document.add(new Paragraph(titulo, ffon1));
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			image = Image.getInstance(retornaImagem(driver));
+			image.scaleAbsolute(500, 300);
+			image.setAlignment(Image.MIDDLE);
+			document.add(image);
+			onEndPage(writer, document);
+			document.add(Chunk.NEXTPAGE);
+		} catch (BadElementException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public void fecharDocumentoPDF() {
 		File file = new File(caminho);
 		file.delete();
 		document.addTitle("Cedro Technologies");
-		document.addAuthor("Julimar Júnior");
-		document.addSubject("Execução automatizada");
+		document.addAuthor("Julimar Junior");
+		document.addSubject("Execucao automatizada");
 		document.addKeywords("Cedro, Teste, Julimar");
 		document.addCreator("JMJR - https://br.linkedin.com/in/julimar-ant%C3%B4nio-de-miranda-j%C3%BAnior-b33a4b58");
 		document.close();
@@ -121,7 +154,7 @@ public class Evidencia {
 		String hora = new SimpleDateFormat("HH:mm:ss").format(dataHoraAtual);
 
 		PdfContentByte cb = writer.getDirectContent();
-		Phrase header = new Phrase("Evidência de teste automatizado - " + data + " " + hora, ffont);
+		Phrase header = new Phrase("Evidencia de teste automatizado - " + data + " " + hora, ffont);
 		Phrase footer = new Phrase("Cedro Technologies", ffont);
 		ColumnText.showTextAligned(cb, Element.ALIGN_CENTER, header,
 				(document.right() - document.left()) / 2 + document.leftMargin(), document.top() + 10, 0);

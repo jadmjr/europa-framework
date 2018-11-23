@@ -56,7 +56,7 @@ formatter.match({
   "location": "Controle.o_endere_o_do_Google(String)"
 });
 formatter.result({
-  "duration": 14006288576,
+  "duration": 5868799233,
   "status": "passed"
 });
 formatter.match({
@@ -69,21 +69,21 @@ formatter.match({
   "location": "Controle.pesquisar_o_valor(String)"
 });
 formatter.result({
-  "duration": 1242384264,
+  "duration": 925311093,
   "status": "passed"
 });
 formatter.match({
   "location": "Controle.clicar_no_botao_pesquisa()"
 });
 formatter.result({
-  "duration": 3641411964,
+  "duration": 2116607935,
   "status": "passed"
 });
 formatter.match({
   "location": "Controle.verificar_se_o_primerio_resultado_e_a_pagina_do_Linkedin()"
 });
 formatter.result({
-  "duration": 273001176,
+  "duration": 906593558,
   "status": "passed"
 });
 });
